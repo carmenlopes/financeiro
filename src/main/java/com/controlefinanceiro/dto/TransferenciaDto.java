@@ -1,4 +1,4 @@
-package com.controlefinanceiro.controller;
+package com.controlefinanceiro.dto;
 
 import com.controlefinanceiro.model.Conta;
 

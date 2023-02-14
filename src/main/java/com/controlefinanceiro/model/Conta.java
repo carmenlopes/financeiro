@@ -27,6 +27,16 @@ public class Conta implements Transacoes {
     public Conta() {
     }
 
+    
+
+    public Conta(String nome, double saldoTotal, TipoConta tipoConta) {
+        this.nome = nome;
+        this.saldoTotal = saldoTotal;
+        this.tipoConta = tipoConta;
+    }
+
+
+
     public Conta(Long id, String nome, double saldoTotal, TipoConta tipoConta) {
         this.id = id;
         this.nome = nome;

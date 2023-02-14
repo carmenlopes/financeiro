@@ -1,30 +1,32 @@
 package com.controlefinanceiro.model;
 
-import java.time.LocalDate;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import com.controlefinanceiro.interfaces.Transacoes;
+import lombok.Data;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-@Getter @Setter @ToString
+@Data
+@Entity
 public class Meta  implements Transacoes{
 
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
     private double saldoTotal;
     private double valorEsperado;
     private double metaMensal;
-    private LocalDate dataLimte;
 
-    public Meta(Long id, String nome, double saldoTotal, double valorEsperado, double metaMensal, LocalDate dataLimte) {
+    public Meta(Long id, String nome, double saldoTotal, double valorEsperado, double metaMensal) {
         this.id = id;
         this.nome = nome;
         this.saldoTotal = saldoTotal;
         this.valorEsperado = valorEsperado;
         this.metaMensal = metaMensal;
-        this.dataLimte = dataLimte;
+    }
+
+    public Meta() {
     }
 
     @Override

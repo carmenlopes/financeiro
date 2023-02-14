@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.controlefinanceiro.dto.MetaDto;
+import com.controlefinanceiro.dto.TransferenciaDto;
 import com.controlefinanceiro.model.Conta;
+import com.controlefinanceiro.model.Meta;
 import com.controlefinanceiro.service.ContaService;
 
 @RestController
@@ -49,5 +52,10 @@ public class ContaController {
     @PutMapping(value = "/transferencia")
     public Optional<Conta> transferenciaEntreContas(@RequestBody @Valid TransferenciaDto transf) {
         return service.transferenciaEntreContas(transf);
+    }
+
+    @PutMapping(value = "/transferencia/meta")
+    public Optional<Meta> transferenciaContaParaMeta(@RequestBody @Valid MetaDto transf) {
+        return service.transferenciaParaMeta(transf);
     }
 }

@@ -8,18 +8,26 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.stereotype.Service;
 
-import com.controlefinanceiro.controller.TransferenciaDto;
+import com.controlefinanceiro.dto.MetaDto;
+import com.controlefinanceiro.dto.TransferenciaDto;
 import com.controlefinanceiro.exception.RecordNotFoundException;
 import com.controlefinanceiro.model.Conta;
+import com.controlefinanceiro.model.Meta;
 import com.controlefinanceiro.repository.ContaRepository;
+import com.controlefinanceiro.repository.MetaRepository;
 
 @Service
 public class ContaService {
 
     public final ContaRepository repository;
 
-    public ContaService(ContaRepository repository) {
+    public final MetaRepository metaRepository;
+
+   
+
+    public ContaService(ContaRepository repository, MetaRepository metaRepository) {
         this.repository = repository;
+        this.metaRepository = metaRepository;
     }
 
     public List<Conta> listAll() {
@@ -55,10 +63,19 @@ public class ContaService {
                     origin.transfDinheiroOutraConta(dest, transf.getValor());
                     return repository.save(origin);
                 });
-
                 return repository.save(dest);
             });
             return destino;
+    }
 
+    public Optional<Meta> transferenciaParaMeta(@Valid MetaDto transf) {
+        Optional<Meta> destino = metaRepository.findById(transf.getMetaDestinada().getId()).map(dest -> {
+            repository.findById(transf.getContaOrigem().getId()).map(origem -> {
+                origem.transfDinheiroParaMeta(dest, transf.getValor());
+                return repository.save(origem);
+            });
+            return metaRepository.save(dest);
+        });
+            return destino;
     }
 }
