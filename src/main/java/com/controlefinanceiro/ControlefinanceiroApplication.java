@@ -8,8 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.controlefinanceiro.enums.TipoConta;
 import com.controlefinanceiro.model.Conta;
+import com.controlefinanceiro.model.TipoDespesa;
 import com.controlefinanceiro.repository.ContaRepository;
-import com.controlefinanceiro.repository.MetaRepository;
+import com.controlefinanceiro.repository.TipoDespesaRepository;
 
 @SpringBootApplication
 public class ControlefinanceiroApplication implements CommandLineRunner{
@@ -21,11 +22,15 @@ public class ControlefinanceiroApplication implements CommandLineRunner{
 	@Autowired
 	private ContaRepository repo;
 
+	@Autowired
+	private TipoDespesaRepository repoTipo;
+
 
 	@Override
 	public void run(String... args) throws Exception {
 		repo.save(new Conta("Itau",100, TipoConta.CORRENTE));
 		repo.save(new Conta("Nubank",125, TipoConta.CORRENTE));
+		repoTipo.save((new TipoDespesa("Internet", "")));
 
 
 	}

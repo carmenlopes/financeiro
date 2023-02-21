@@ -12,33 +12,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.controlefinanceiro.model.Meta;
-import com.controlefinanceiro.service.MetaService;
+import com.controlefinanceiro.model.Despesa;
+import com.controlefinanceiro.model.TipoDespesa;
+import com.controlefinanceiro.service.TipoDespesaService;
 
 @RestController
-@RequestMapping("/api/meta")
-public class MetaController {
-    
-    private final MetaService service;
+@RequestMapping("/api/tipodespesa")
+public class TipoDespesaController {
 
-    public MetaController(MetaService service) {
+    private final TipoDespesaService service;
+
+    public TipoDespesaController(TipoDespesaService service) {
         this.service = service;
     }
 
     @GetMapping
-    public List<Meta> list(){
+    public List<TipoDespesa> list(){
         return service.listAll();
     }
-
+    
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Meta cadastrar(@RequestBody @Valid Meta meta) throws Throwable {
-        return service.create(meta);
+    public TipoDespesa gravar(@RequestBody @Valid TipoDespesa despesa) throws Throwable {
+        return service.create(despesa);
     }
-
-    //TODO: Editar meta (nome, mensal)
-    //TODO: Add na meta
-    //TODO: Resgatar da meta
-
-
+    
 }

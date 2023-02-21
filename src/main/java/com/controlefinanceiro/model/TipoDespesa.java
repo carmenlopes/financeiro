@@ -1,11 +1,15 @@
 package com.controlefinanceiro.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
-@Getter @Setter @ToString
+import lombok.Data;
+
+@Data @Entity
 public class TipoDespesa {
+    @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
     private String icon;
@@ -15,5 +19,13 @@ public class TipoDespesa {
         this.nome = nome;
     }
 
+    public TipoDespesa(String nome, String icon) {
+        this.nome = nome;
+        this.icon = icon;
+    }
+
+    public TipoDespesa() {
+    }
+    
     
 }
