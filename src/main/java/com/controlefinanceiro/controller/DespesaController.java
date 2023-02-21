@@ -46,14 +46,12 @@ public class DespesaController {
         if(!despesa.isDespesaFixa()){
             return ResponseEntity.ok(Arrays.asList(service.create(despesa)));
         }else{
-            System.out.println("repete qtd vezes: "+despesa.getQtdRepeticao());
             for(int i= 0; i < despesa.getQtdRepeticao(); i++){
                Despesa d = new Despesa();
                d.setNome(despesa.getNome());
                d.setValor(despesa.getValor());
                d.setDtVencimento(despesa.getDtVencimento().plusMonths(i));
                d.setDespesaFixa(despesa.isDespesaFixa());
-               d.setQtdRepeticao(despesa.getQtdRepeticao());
                d.setPaga(despesa.isPaga());
                d.setTipoDespesa(despesa.getTipoDespesa());
                d.setContaDePagamento(despesa.getContaDePagamento());

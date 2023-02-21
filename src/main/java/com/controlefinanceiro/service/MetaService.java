@@ -45,4 +45,11 @@ public class MetaService {
             return repository.save(meta);
         });
     }
+
+    public @Valid Optional<Meta> guardarNaMeta(@Valid Long id, Meta req) {
+        return repository.findById(id).map(meta -> {
+           meta.addNoSaldo(req.getValorEsperado());
+            return repository.save(meta);
+        });
+    }
 }

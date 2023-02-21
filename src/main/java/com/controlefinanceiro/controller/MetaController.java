@@ -48,6 +48,12 @@ public class MetaController {
         return service.update(id, req);
     }
 
+    @PutMapping(value= "/guardar/{id}")
+    @ResponseStatus(code = HttpStatus.ACCEPTED)
+    public @Valid Optional<Meta> guardarNaMeta(@PathVariable @Positive @NotNull Long id, @RequestBody Meta req) throws Throwable {
+        return service.guardarNaMeta(id, req);
+    }
+
     //TODO: Add na meta
     //TODO: Resgatar da meta
 
