@@ -2,11 +2,14 @@ package com.controlefinanceiro.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,23 +37,26 @@ public class DespesaController {
     
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public List<Despesa> gravar(@RequestBody @Valid Despesa despesa) throws Throwable {
-        List<Despesa> despesas = new ArrayList<>();
+    public ResponseEntity<List<Despesa>> gravar(@RequestBody Despesa despesa) throws Throwable {
+        List<Despesa> saved = new ArrayList<>();
 
         if(!despesa.isDespesaFixa()){
-            return List.of(service.create(despesa));
+            return ResponseEntity.ok(Arrays.asList(service.create(despesa)));
         }else{
-            for(int i= 0; i < despesa.getQtdRepeticao();i++){
-                service.create(despesa);
-                despesas.add(despesa);
+            System.out.println("repete qtd vezes: "+despesa.getQtdRepeticao());
+            service.create(despesa);
+            for(int i= 0; i < despesa.getQtdRepeticao(); i++){
                 Despesa clonador = despesa.clonarObjeto();
-                LocalDate repete = clonador.getDtVencimento().plusMonths(1);
-                clonador.setDtVencimento(repete);
-                service.create(despesa);
-                despesas.add(clonador);
+                LocalDate add = clonador.getDtVencimento().plusMonths(i);
+                clonador.setDtVencimento(add);   
+                service.create(clonador);           
+                saved.add(clonador);
+               System.out.println("socorro aaaaah: "+saved.toString());
 
             }
-            return despesas;
+            System.out.println("socorro meu deus: "+saved.toString());
+            // service.createAll(saved);
+            return ResponseEntity.ok(saved);
            
         }
     }

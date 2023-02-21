@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.controlefinanceiro.model.Despesa;
@@ -22,7 +23,11 @@ public class DespesaService {
         return repository.findAll();
     }
 
-    public Despesa create(@Valid Despesa req) {
+    public @Valid Despesa create(@Valid Despesa req) {
         return repository.save(req);
+    }
+
+    public @Valid List<Despesa> createAll( List<Despesa> req) {
+        return repository.saveAll(req);
     }
 }

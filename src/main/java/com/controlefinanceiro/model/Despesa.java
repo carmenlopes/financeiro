@@ -1,5 +1,6 @@
 package com.controlefinanceiro.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Entity;
@@ -12,8 +13,10 @@ import javax.persistence.OneToOne;
 import lombok.Data;
 
 @Data @Entity
-public class Despesa implements Cloneable {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+public class Despesa implements Cloneable, Serializable {
+    private static final long serialVersionUID = -2420346134960559062L;
+
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private String nome;
     private Double valor;
@@ -37,6 +40,9 @@ public class Despesa implements Cloneable {
         this.paga = paga;
         this.tipoDespesa = tipoDespesa;
         this.contaDePagamento = contaDePagamento;
+    }
+
+    public Despesa() {
     }
 
     public void pagarDespesa(){
