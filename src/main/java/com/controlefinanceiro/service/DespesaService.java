@@ -1,13 +1,15 @@
 package com.controlefinanceiro.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.controlefinanceiro.model.Conta;
 import com.controlefinanceiro.model.Despesa;
+import com.controlefinanceiro.repository.ContaRepository;
 import com.controlefinanceiro.repository.DespesaRepository;
 
 @Service
@@ -15,8 +17,11 @@ public class DespesaService {
 
     private final DespesaRepository repository;
 
-    public DespesaService(DespesaRepository repository) {
+    private final ContaRepository repositoryConta;
+
+    public DespesaService(DespesaRepository repository, ContaRepository repositoryConta) {
         this.repository = repository;
+        this.repositoryConta = repositoryConta;
     }
 
     public List<Despesa> listAll() {
@@ -27,7 +32,18 @@ public class DespesaService {
         return repository.save(req);
     }
 
-    public @Valid List<Despesa> createAll( List<Despesa> req) {
+    public @Valid List<Despesa> createAll(List<Despesa> req) {
         return repository.saveAll(req);
+    }
+
+    public @Valid Optional<Despesa> update(@Valid Long id) {
+        return repository.findById(id).map(despesa -> {
+            Long ident = despesa.getContaDePagamento().getId();
+            Conta conta = repositoryConta.findById(ident).get();
+            conta.removerDoSaldo(despesa.getValor());
+            despesa.setPaga(true);
+            despesa.setContaDePagamento(conta);
+            return despesa;
+            });
     }
 }

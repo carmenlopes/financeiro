@@ -47,19 +47,8 @@ public class Despesa implements Cloneable, Serializable {
     public Despesa() {
     }
 
-    public void pagarDespesa(){
-       contaDePagamento.removerDoSaldo(valor);
-       this.paga = true;
-    }
-
-    public Despesa clonarObjeto() throws CloneNotSupportedException{
-        
-        return (Despesa) clone();
-    }
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-        return (Despesa) super.clone();
-    }
-
+    // public void pagarDespesa(){
+    //    contaDePagamento.removerDoSaldo(valor);
+    //    this.paga = true;
+    // }
 }
