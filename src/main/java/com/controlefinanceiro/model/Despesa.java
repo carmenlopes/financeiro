@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
 
 import lombok.Data;
 
@@ -22,6 +23,7 @@ public class Despesa implements Cloneable, Serializable {
     private Double valor;
     private LocalDate dtVencimento;
     private boolean despesaFixa;
+    @Transient
     private int qtdRepeticao = 0;
     private boolean paga = false;
     
