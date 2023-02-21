@@ -17,10 +17,7 @@ public class TesteDespesa {
       
        System.out.println("MESES: "+despesa.getDtVencimento().plusMonths(12));
        System.out.println("Despesa 1: "+despesa);
-
-       Despesa clonador = despesa.clonarObjeto();
        
-       System.out.println("Despesa 2: "+clonador.toString());
        System.out.println(despesa.getClass().toString());
     //    despesa.pagarDespesa();
 
