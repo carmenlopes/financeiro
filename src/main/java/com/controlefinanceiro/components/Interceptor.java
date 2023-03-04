@@ -1,45 +1,77 @@
 package com.controlefinanceiro.components;
 
-
-import java.lang.constant.ClassDesc;
+import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.Optional;
+import java.lang.reflect.Type;
+import java.time.LocalDateTime;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.io.IOUtils;
-import org.aspectj.apache.bcel.generic.ObjectType;
-import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Component;
-import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.HandlerInterceptor;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpInputMessage;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.RequestBodyAdviceAdapter;
 
 import com.controlefinanceiro.anotacoes.Movimentar;
-import com.controlefinanceiro.enums.MovimentacaoTipo;
-import com.controlefinanceiro.model.Receita;
+import com.controlefinanceiro.repository.MovimentarRepository;
+import com.controlefinanceiro.utils.LoggingService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Component
-public class Interceptor implements HandlerInterceptor {
+@ControllerAdvice
+public class Interceptor extends RequestBodyAdviceAdapter {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(Interceptor.class);
+
+    private MovimentarRepository repository;
+
+    @Autowired
+    LoggingService loggingService;
+
+    @Autowired
+    HttpServletRequest httpServletRequest;
+
+    @Autowired
+    HttpServletResponse httpServletResponse;
+
+    public Interceptor(MovimentarRepository repository) {
+        this.repository = repository;
+    }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable Exception ex) throws Exception {
-     HandlerMethod hm;
-      hm = (HandlerMethod) handler;
-    
-     Method method = hm.getMethod();
-     String classe =  method.getReturnType().getSimpleName();
-         if (method.isAnnotationPresent(Movimentar.class)) {
-            if("Receita".equals(classe)){
-              System.out.println("AAAAAAAAAAA>>>>>"+ IOUtils.toString(request.getReader()));
-         }
-          
+    public Object afterBodyRead(Object body, HttpInputMessage inputMessage, MethodParameter parameter,
+            Type targetType, Class<? extends HttpMessageConverter<?>> converterType) {
+                log.info("eefefefe------> "+body.toString());
+        loggingService.logResponse(httpServletRequest, httpServletResponse, body);
+        System.out.println("wewereewtrte");
 
-          //    System.out.println(method.getAnnotation(Movimentar.class).movimentacaoType().getValue());
+        log.info("configuração");
+
+        Method methodName = parameter.getMethod();
+        String classe = methodName.getReturnType().getSimpleName();
+        if (StringUtils.isNotBlank(methodName.getName())
+                && methodName.isAnnotationPresent(Movimentar.class)) {
+
+            if ("Receita".equals(classe)) {
+            }
+
         }
+       
+
+        return super.afterBodyRead(body, inputMessage, parameter, targetType, converterType);
+    }
+
+    @Override
+    public boolean supports(MethodParameter methodParameter, Type type,
+            Class<? extends HttpMessageConverter<?>> aClass) {
+       
+        return true;
     }
 
 }

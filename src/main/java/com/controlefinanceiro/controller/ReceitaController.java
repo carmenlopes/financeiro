@@ -21,6 +21,9 @@ import com.controlefinanceiro.service.ReceitaService;
 @RestController
 @RequestMapping("/api/receita")
 public class ReceitaController {
+
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ReceitaController.class);
+
     
     private final ReceitaService service;
 

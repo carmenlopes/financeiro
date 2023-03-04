@@ -10,10 +10,10 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class ConfigInterceptor implements WebMvcConfigurer{
     
-    private final Interceptor inperceptor;
+    // private final Interceptor inperceptor;
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(inperceptor);
-    }
+    // @Override
+    // public void addInterceptors(InterceptorRegistry registry) {
+    //     registry.addInterceptor(inperceptor);
+    // }
 }

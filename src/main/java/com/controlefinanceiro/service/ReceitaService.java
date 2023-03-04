@@ -14,6 +14,8 @@ import com.controlefinanceiro.repository.TipoReceitaRepository;
 
 @Service
 public class ReceitaService {
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ReceitaService.class);
+
 
     public final TipoReceitaRepository tipoReceitaRepo;
     public final ReceitaRepository receitaRepo;
@@ -31,11 +33,14 @@ public class ReceitaService {
     }
 
     public @Valid Receita createReceita(@Valid Receita req) {
+        Receita receita;
             contaRepo.findById(req.getContaDestino().getId()).map(conta -> {
                 req.adicionarConta(conta);
                 return contaRepo.save(conta);
             });
-        return receitaRepo.save(req);
+            receita = receitaRepo.save(req);
+            log.info("o vai pro controller -----> ",receita.toString());
+        return receita;
     }
 
     public List<TipoReceita> listTipos(){
