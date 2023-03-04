@@ -52,4 +52,12 @@ public class MetaService {
             return repository.save(meta);
         });
     }
+
+    //TODO: TESTAR RESGATE DA META
+    public @Valid Optional<Meta> resgatardaMeta(@Valid Long id, Meta req) {
+        return repository.findById(id).map(meta -> {
+           meta.removerDoSaldo(req.getValorEsperado());
+            return repository.save(meta);
+        });
+    }
 }

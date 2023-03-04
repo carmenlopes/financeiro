@@ -54,7 +54,12 @@ public class MetaController {
         return service.guardarNaMeta(id, req);
     }
 
-    //TODO: Add na meta
+    @PutMapping(value= "/resgatar/{id}")
+    @ResponseStatus(code = HttpStatus.ACCEPTED)
+    public @Valid Optional<Meta> resgatarDaMeta(@PathVariable @Positive @NotNull Long id, @RequestBody Meta req) throws Throwable {
+        return service.guardarNaMeta(id, req);
+    }
+
     //TODO: Resgatar da meta
 
 
