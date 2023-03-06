@@ -57,10 +57,8 @@ public class MetaController {
     @PutMapping(value= "/resgatar/{id}")
     @ResponseStatus(code = HttpStatus.ACCEPTED)
     public @Valid Optional<Meta> resgatarDaMeta(@PathVariable @Positive @NotNull Long id, @RequestBody Meta req) throws Throwable {
-        return service.guardarNaMeta(id, req);
+        return service.resgatardaMeta(id, req);
     }
-
-    //TODO: Resgatar da meta
 
 
 }
