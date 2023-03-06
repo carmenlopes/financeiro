@@ -14,4 +14,20 @@ public class TipoReceita {
     private String nome;
     private String icon;
 
+    public TipoReceita() {
+    }
+
+    public TipoReceita(Long id, String nome, String icon) {
+        this.id = id;
+        this.nome = nome;
+        this.icon = icon;
+    }
+
+    public TipoReceita(String nome, String icon) {
+        this.nome = nome;
+        this.icon = icon;
+    }
+
+    
+
 }

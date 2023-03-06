@@ -22,15 +22,17 @@ public class Despesa implements Cloneable, Serializable {
     private String nome;
     private Double valor;
     private LocalDate dtVencimento;
+    private LocalDate dtFechamento; // usado apenas para despesa do tipo cartao
     private boolean despesaFixa;
-    @Transient
-    private int qtdRepeticao = 0;
     private boolean paga = false;
     
     @OneToOne
     private TipoDespesa tipoDespesa;
     @ManyToOne
     private Conta contaDePagamento;
+
+    @Transient
+    private int qtdRepeticao = 0;
 
     public Despesa(Long id, String nome, Double valor, LocalDate dtVencimento, boolean despesaFixa, boolean paga,
             TipoDespesa tipoDespesa, Conta contaDePagamento) {

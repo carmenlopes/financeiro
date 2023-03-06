@@ -1,6 +1,7 @@
 package com.controlefinanceiro.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -33,14 +34,13 @@ public class ReceitaService {
     }
 
     public @Valid Receita createReceita(@Valid Receita req) {
-        Receita receita;
             contaRepo.findById(req.getContaDestino().getId()).map(conta -> {
                 req.adicionarConta(conta);
+               TipoReceita t = tipoReceitaRepo.findById(req.getTipoReceita().getId()).get();
+               req.setTipoReceita(t);
                 return contaRepo.save(conta);
             });
-            receita = receitaRepo.save(req);
-            log.info("o vai pro controller -----> ",receita.toString());
-        return receita;
+            return receitaRepo.save(req);
     }
 
     public List<TipoReceita> listTipos(){

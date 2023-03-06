@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.controlefinanceiro.anotacoes.Movimentar;
 import com.controlefinanceiro.model.Despesa;
 import com.controlefinanceiro.service.DespesaService;
 
@@ -65,6 +66,7 @@ public class DespesaController {
 
     @PatchMapping(value= "/{id}")
     @ResponseStatus(code = HttpStatus.ACCEPTED)
+    @Movimentar
     public @Valid Optional<Despesa> pagarDespesa(@PathVariable @Positive @NotNull Long id) throws Throwable {
         return service.update(id);
     }

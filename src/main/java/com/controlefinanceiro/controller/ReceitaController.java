@@ -33,7 +33,7 @@ public class ReceitaController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    @Movimentar(movimentacaoType = MovimentacaoTipo.RECEITA)
+    @Movimentar
     public Receita cadastrarReceita(@RequestBody @Valid Receita receita) throws Throwable {
         return service.createReceita(receita);
     }
