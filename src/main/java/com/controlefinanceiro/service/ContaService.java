@@ -3,9 +3,6 @@ package com.controlefinanceiro.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.stereotype.Service;
 
 import com.controlefinanceiro.dto.MetaDto;
@@ -15,6 +12,9 @@ import com.controlefinanceiro.model.Conta;
 import com.controlefinanceiro.model.Meta;
 import com.controlefinanceiro.repository.ContaRepository;
 import com.controlefinanceiro.repository.MetaRepository;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 @Service
 public class ContaService {

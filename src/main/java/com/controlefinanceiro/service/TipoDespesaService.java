@@ -2,12 +2,12 @@ package com.controlefinanceiro.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Service;
 
 import com.controlefinanceiro.model.TipoDespesa;
 import com.controlefinanceiro.repository.TipoDespesaRepository;
+
+import jakarta.validation.Valid;
 
 @Service
 public class TipoDespesaService {

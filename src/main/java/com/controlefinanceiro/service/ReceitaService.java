@@ -1,9 +1,6 @@
 package com.controlefinanceiro.service;
 
 import java.util.List;
-import java.util.Optional;
-
-import javax.validation.Valid;
 
 import org.springframework.stereotype.Service;
 
@@ -13,9 +10,11 @@ import com.controlefinanceiro.repository.ContaRepository;
 import com.controlefinanceiro.repository.ReceitaRepository;
 import com.controlefinanceiro.repository.TipoReceitaRepository;
 
+import jakarta.validation.Valid;
+
 @Service
 public class ReceitaService {
-    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ReceitaService.class);
+    // private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(ReceitaService.class);
 
 
     public final TipoReceitaRepository tipoReceitaRepo;

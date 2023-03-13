@@ -2,12 +2,12 @@ package com.controlefinanceiro.service;
 
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Service;
 
 import com.controlefinanceiro.model.Movimentacao;
 import com.controlefinanceiro.repository.MovimentarRepository;
+
+import jakarta.validation.Valid;
 
 @Service
 public class MovimentacaoService {

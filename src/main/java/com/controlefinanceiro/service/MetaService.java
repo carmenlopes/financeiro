@@ -3,13 +3,13 @@ package com.controlefinanceiro.service;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.stereotype.Service;
 
 import com.controlefinanceiro.dto.MetaEditReq;
 import com.controlefinanceiro.model.Meta;
 import com.controlefinanceiro.repository.MetaRepository;
+
+import jakarta.validation.Valid;
 
 @Service
 public class MetaService {
