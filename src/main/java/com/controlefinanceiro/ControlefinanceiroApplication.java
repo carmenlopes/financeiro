@@ -1,7 +1,8 @@
 package com.controlefinanceiro;
 
 import com.controlefinanceiro.model.Despesa;
-import com.controlefinanceiro.repository.DespesaRepository;
+import com.controlefinanceiro.model.Receita;
+import com.controlefinanceiro.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -9,11 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.controlefinanceiro.enums.TipoConta;
 import com.controlefinanceiro.model.Conta;
-import com.controlefinanceiro.model.TipoDespesa;
-import com.controlefinanceiro.model.TipoReceita;
-import com.controlefinanceiro.repository.ContaRepository;
-import com.controlefinanceiro.repository.TipoDespesaRepository;
-import com.controlefinanceiro.repository.TipoReceitaRepository;
+import com.controlefinanceiro.model.types.TipoDespesa;
+import com.controlefinanceiro.model.types.TipoReceita;
 
 import java.time.LocalDate;
 
@@ -28,10 +26,10 @@ public class ControlefinanceiroApplication implements CommandLineRunner{
 	private ContaRepository repo;
 	@Autowired
 	private DespesaRepository despRepo;
-
+	@Autowired
+	private ReceitaRepository receitaRepo;
 	@Autowired
 	private TipoDespesaRepository repoTipo;
-
 	@Autowired
 	private TipoReceitaRepository repoReceita;
 
@@ -39,7 +37,7 @@ public class ControlefinanceiroApplication implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		var conta1 = new Conta("Itau",100, TipoConta.CORRENTE);
 		repo.save(conta1);
-		repo.save(new Conta("Nubank",125, TipoConta.CORRENTE));
+		repo.save(new Conta("Nubank",125, TipoConta.POUPANCA));
 
 		var td1 = (new TipoDespesa("Internet", ""));
 		var td2 = (new TipoDespesa("Celular", ""));
@@ -49,8 +47,19 @@ public class ControlefinanceiroApplication implements CommandLineRunner{
 		repoTipo.save(td3);
 
 		despRepo.save(new Despesa("Espaço Laser",150.50, LocalDate.of(2023,10,20),
-				true,false,td3, conta1, 2));
-		repoReceita.save(new TipoReceita("Salario", ""));
+				true, td3, 2));
+
+		var tipoRecSalario = new TipoReceita("Salario", "");
+		repoReceita.save(tipoRecSalario);
+
+		var receita1 = new Receita("Salário",5456.88, tipoRecSalario, LocalDate.now(),conta1);
+		var receita2 = new Receita("Salário",5456.88, tipoRecSalario, LocalDate.of(2023,10,10),conta1);
+		var receita3 = new Receita("Salário",500.88, tipoRecSalario, LocalDate.of(2023,11,10),conta1);
+
+		receitaRepo.save(receita1);
+		receitaRepo.save(receita2);
+		receitaRepo.save(receita3);
+
 
 
 	}

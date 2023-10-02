@@ -1,11 +1,8 @@
 package com.controlefinanceiro.testes;
 
-import java.time.LocalDate;
-
 import com.controlefinanceiro.enums.TipoConta;
 import com.controlefinanceiro.model.Conta;
-import com.controlefinanceiro.model.Despesa;
-import com.controlefinanceiro.model.TipoDespesa;
+import com.controlefinanceiro.model.types.TipoDespesa;
 
 public class TesteDespesa {
    public static void main(String[] args) throws CloneNotSupportedException {

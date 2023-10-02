@@ -38,11 +38,10 @@ public class DespesaService {
 
     public @Valid Optional<Despesa> update(@Valid Long id) {
         return repository.findById(id).map(despesa -> {
-            Long ident = despesa.getContaDePagamento().getId();
-            Conta conta = repositoryConta.findById(ident).get();
-            conta.removerDoSaldo(despesa.getValor());
-            despesa.setPaga(true);
-            despesa.setContaDePagamento(conta);
+//            Long ident = despesa.getContaDePagamento().getId();
+//            Conta conta = repositoryConta.findById(ident).get();
+//            conta.removerDoSaldo(despesa.getValor());
+//            despesa.setContaDePagamento(conta);
             return despesa;
             });
     }

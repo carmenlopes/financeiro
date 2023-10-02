@@ -35,29 +35,32 @@ public class MetaService {
 
     
     public @Valid Optional<Meta> update(@Valid Long id, MetaEditReq req) {
-        return repository.findById(id).map(meta -> {
-            if(!req.getNome().isEmpty()){
-                meta.setNome(req.getNome());
-            }
-            if(req.getMetaMensal() != 0){
-                meta.setMetaMensal(req.getMetaMensal());
-            }
-            return repository.save(meta);
-        });
+//        return repository.findById(id).map(meta -> {
+//            if(!req.getNome().isEmpty()){
+//                meta.setNome(req.getNome());
+//            }
+//            if(req.getMetaMensal() != 0){
+//                meta.setMetaMensal(req.getMetaMensal());
+//            }
+//            return repository.save(meta);
+//        });
+        return null;
     }
 
     public @Valid Optional<Meta> guardarNaMeta(@Valid Long id, Meta req) {
-        return repository.findById(id).map(meta -> {
-           meta.addNoSaldo(req.getValorEsperado());
-            return repository.save(meta);
-        });
+//        return repository.findById(id).map(meta -> {
+//           meta.addNoSaldo(req.getValorEsperado());
+//            return repository.save(meta);
+//        });
+        return null;
     }
 
     public @Valid Optional<Meta> resgatardaMeta(@Valid Long id, Meta req) {
-        return repository.findById(id).map(meta -> {
-           meta.removerDoSaldo(req.getValorEsperado());
-            return repository.save(meta);
-        });
+//        return repository.findById(id).map(meta -> {
+//           meta.removerDoSaldo(req.getValorEsperado());
+//            return repository.save(meta);
+//        });
+        return null;
     }
 
 

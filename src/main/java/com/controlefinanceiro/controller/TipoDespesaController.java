@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.controlefinanceiro.model.TipoDespesa;
+import com.controlefinanceiro.model.types.TipoDespesa;
 import com.controlefinanceiro.service.TipoDespesaService;
 
 import jakarta.validation.Valid;

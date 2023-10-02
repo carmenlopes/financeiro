@@ -3,10 +3,7 @@ package com.controlefinanceiro.model;
 import com.controlefinanceiro.enums.TipoConta;
 import com.controlefinanceiro.interfaces.Transacoes;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,20 +17,16 @@ public class Conta implements Transacoes {
     private Long id;
     private String nome;
     private double saldoTotal;
+    @Enumerated(EnumType.STRING)
     private TipoConta tipoConta;
-
     public Conta() {
     }
-
-    
 
     public Conta(String nome, double saldoTotal, TipoConta tipoConta) {
         this.nome = nome;
         this.saldoTotal = saldoTotal;
         this.tipoConta = tipoConta;
     }
-
-
 
     public Conta(Long id, String nome, double saldoTotal, TipoConta tipoConta) {
         this.id = id;

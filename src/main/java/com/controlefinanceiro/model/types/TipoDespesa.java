@@ -1,4 +1,4 @@
-package com.controlefinanceiro.model;
+package com.controlefinanceiro.model.types;
 
 
 import jakarta.persistence.Entity;
