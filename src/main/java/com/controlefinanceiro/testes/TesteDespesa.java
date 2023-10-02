@@ -13,12 +13,12 @@ public class TesteDespesa {
        System.out.println("CONTA1: "+conta);
 
        TipoDespesa tipoDespesa = new TipoDespesa(2L, "Cartão de Crédito");
-       Despesa despesa = new Despesa(1L, "Cartao Nubank", 5.0, LocalDate.of(2023,02,20), false, false, tipoDespesa, conta);
+//       Despesa despesa = new Despesa(1L, "Cartao Nubank", 5.0, LocalDate.of(2023,02,20), false, false, tipoDespesa, conta);
       
-       System.out.println("MESES: "+despesa.getDtVencimento().plusMonths(12));
-       System.out.println("Despesa 1: "+despesa);
+//       System.out.println("MESES: "+despesa.getDtVencimento().plusMonths(12));
+//       System.out.println("Despesa 1: "+despesa);
        
-       System.out.println(despesa.getClass().toString());
+//       System.out.println(despesa.getClass().toString());
     //    despesa.pagarDespesa();
 
    }

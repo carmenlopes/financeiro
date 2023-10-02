@@ -1,5 +1,7 @@
 package com.controlefinanceiro;
 
+import com.controlefinanceiro.model.Despesa;
+import com.controlefinanceiro.repository.DespesaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -13,6 +15,8 @@ import com.controlefinanceiro.repository.ContaRepository;
 import com.controlefinanceiro.repository.TipoDespesaRepository;
 import com.controlefinanceiro.repository.TipoReceitaRepository;
 
+import java.time.LocalDate;
+
 @SpringBootApplication
 public class ControlefinanceiroApplication implements CommandLineRunner{
 
@@ -22,6 +26,8 @@ public class ControlefinanceiroApplication implements CommandLineRunner{
 
 	@Autowired
 	private ContaRepository repo;
+	@Autowired
+	private DespesaRepository despRepo;
 
 	@Autowired
 	private TipoDespesaRepository repoTipo;
@@ -31,10 +37,19 @@ public class ControlefinanceiroApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-		repo.save(new Conta("Itau",100, TipoConta.CORRENTE));
+		var conta1 = new Conta("Itau",100, TipoConta.CORRENTE);
+		repo.save(conta1);
 		repo.save(new Conta("Nubank",125, TipoConta.CORRENTE));
-		repoTipo.save((new TipoDespesa("Internet", "")));
 
+		var td1 = (new TipoDespesa("Internet", ""));
+		var td2 = (new TipoDespesa("Celular", ""));
+		var td3 = (new TipoDespesa("Laser", ""));
+		repoTipo.save(td1);
+		repoTipo.save(td2);
+		repoTipo.save(td3);
+
+		despRepo.save(new Despesa("Espaço Laser",150.50, LocalDate.of(2023,10,20),
+				true,false,td3, conta1, 2));
 		repoReceita.save(new TipoReceita("Salario", ""));
 
 

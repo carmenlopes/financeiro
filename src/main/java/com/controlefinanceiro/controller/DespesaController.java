@@ -54,6 +54,7 @@ public class DespesaController {
                d.setDtVencimento(despesa.getDtVencimento().plusMonths(i));
                d.setDespesaFixa(despesa.isDespesaFixa());
                d.setPaga(despesa.isPaga());
+               //se não encontrar o tipo de despesa, cria uma nova
                d.setTipoDespesa(despesa.getTipoDespesa());
                d.setContaDePagamento(despesa.getContaDePagamento());
                 saved.add(d);

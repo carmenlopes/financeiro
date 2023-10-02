@@ -10,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Transient;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data @Entity
@@ -33,9 +34,7 @@ public class Despesa implements Cloneable, Serializable {
     @Transient
     private int qtdRepeticao = 0;
 
-    public Despesa(Long id, String nome, Double valor, LocalDate dtVencimento, boolean despesaFixa, boolean paga,
-            TipoDespesa tipoDespesa, Conta contaDePagamento) {
-        this.id = id;
+    public Despesa(String nome, Double valor, LocalDate dtVencimento, boolean despesaFixa, boolean paga, TipoDespesa tipoDespesa, Conta contaDePagamento, int qtdRepeticao) {
         this.nome = nome;
         this.valor = valor;
         this.dtVencimento = dtVencimento;
@@ -43,9 +42,11 @@ public class Despesa implements Cloneable, Serializable {
         this.paga = paga;
         this.tipoDespesa = tipoDespesa;
         this.contaDePagamento = contaDePagamento;
+        this.qtdRepeticao = qtdRepeticao;
     }
 
     public Despesa() {
+
     }
 
     // public void pagarDespesa(){
