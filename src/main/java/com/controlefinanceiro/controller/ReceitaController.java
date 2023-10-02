@@ -2,20 +2,17 @@ package com.controlefinanceiro.controller;
 
 import java.util.List;
 
+import com.controlefinanceiro.utils.DataUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.controlefinanceiro.anotacoes.Movimentar;
 import com.controlefinanceiro.model.Receita;
-import com.controlefinanceiro.model.TipoReceita;
+import com.controlefinanceiro.model.types.TipoReceita;
 import com.controlefinanceiro.service.ReceitaService;
 
 import jakarta.validation.Valid;
+
+import javax.xml.crypto.Data;
 
 @RestController
 @RequestMapping("/api/receita")
@@ -29,7 +26,6 @@ public class ReceitaController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    @Movimentar
     public Receita cadastrarReceita(@RequestBody @Valid Receita receita) throws Throwable {
         return service.createReceita(receita);
     }
@@ -43,6 +39,14 @@ public class ReceitaController {
     @GetMapping
     public List<Receita> list(){
         return service.listReceitas();
+    }
+
+    @GetMapping("/{data}")
+    public List<Receita> listReceitasByMes(@PathVariable String data){
+        var dtInicial = DataUtils.convertStringToDate(data);
+        var dtFinal = DataUtils.getLastDayofMonth(data);
+        System.out.println(dtInicial + " "+dtFinal);
+        return service.listReceitasByMes(dtInicial,dtFinal);
     }
     
     @GetMapping(value="/tiporeceita")

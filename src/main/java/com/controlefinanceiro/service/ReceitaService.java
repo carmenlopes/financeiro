@@ -1,11 +1,12 @@
 package com.controlefinanceiro.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
 import com.controlefinanceiro.model.Receita;
-import com.controlefinanceiro.model.TipoReceita;
+import com.controlefinanceiro.model.types.TipoReceita;
 import com.controlefinanceiro.repository.ContaRepository;
 import com.controlefinanceiro.repository.ReceitaRepository;
 import com.controlefinanceiro.repository.TipoReceitaRepository;
@@ -48,6 +49,12 @@ public class ReceitaService {
 
     public List<Receita> listReceitas(){
         return receitaRepo.findAll();
+    }
+
+    public List<Receita> listReceitasByMes(LocalDate inicial, LocalDate Final){
+        var teste = receitaRepo.findAllByDtEntradaBetween(inicial,Final);
+        System.out.println("o q retorna: "+teste);
+        return teste;
     }
 
     
