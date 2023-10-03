@@ -1,20 +1,14 @@
 package com.controlefinanceiro.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.stereotype.Service;
-
-import com.controlefinanceiro.dto.MetaDto;
-import com.controlefinanceiro.dto.TransferenciaDto;
 import com.controlefinanceiro.exception.RecordNotFoundException;
 import com.controlefinanceiro.model.Conta;
-import com.controlefinanceiro.model.Meta;
 import com.controlefinanceiro.repository.ContaRepository;
 import com.controlefinanceiro.repository.MetaRepository;
-
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ContaService {
@@ -54,28 +48,4 @@ public class ContaService {
         .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
-    public Optional<Conta> transferenciaEntreContas(@Valid TransferenciaDto transf) {
-        System.out.println("inicio assim: "+transf.toString());
-        Optional<Conta> destino = repository.findById(transf.getContaDestino().getId()).map(dest ->{
-
-                repository.findById(transf.getContaOrigem().getId()).map((origin) -> {
-                    System.out.println("Destino antes transf ----> "+dest.toString());
-                    origin.transfDinheiroOutraConta(dest, transf.getValor());
-                    return repository.save(origin);
-                });
-                return repository.save(dest);
-            });
-            return destino;
-    }
-
-    public Optional<Meta> transferenciaParaMeta(@Valid MetaDto transf) {
-        Optional<Meta> destino = metaRepository.findById(transf.getMetaDestinada().getId()).map(dest -> {
-            repository.findById(transf.getContaOrigem().getId()).map(origem -> {
-                origem.transfDinheiroParaMeta(dest, transf.getValor());
-                return repository.save(origem);
-            });
-            return metaRepository.save(dest);
-        });
-            return destino;
-    }
 }
