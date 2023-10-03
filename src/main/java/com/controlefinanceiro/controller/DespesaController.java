@@ -8,12 +8,7 @@ import java.util.*;
 import com.controlefinanceiro.utils.DataUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.controlefinanceiro.model.Despesa;
 import com.controlefinanceiro.service.DespesaService;
@@ -74,17 +69,17 @@ public class DespesaController {
         return service.listSomaDespesasByMes(dtInicial, dtFinal);
     }
 
-    @GetMapping("/anual")
+    @GetMapping("/anual/{ano}")
     @ResponseStatus(code = HttpStatus.OK)
-    public Map<String, Double> getSomaDespesasByMes() {
+    public Map<String, Double> getSomaDespesasByMesAno(@PathVariable int ano) {
         Map<String, Double> soma = new LinkedHashMap<>();
         int mes = 1;
         do{
-            var dtInicial = LocalDate.of(2023,mes,1);
-            var dtFinal = LocalDate.of(2023,mes,dtInicial.lengthOfMonth());
+            var dtInicial = LocalDate.of(ano,mes,1);
+            var dtFinal = LocalDate.of(ano,mes,dtInicial.lengthOfMonth());
             String nomeMes = dtInicial.getMonth().getDisplayName(TextStyle.FULL,new Locale("pt", "BR"));
             System.out.println("Nome dom mes: "+nomeMes);
-            soma.put(nomeMes,service.listSomaDespesasByMes(dtInicial, dtFinal));
+            soma.put(nomeMes.toUpperCase(),service.listSomaDespesasByMes(dtInicial, dtFinal));
             mes++;
         }while (mes <= 12);
         return soma;
