@@ -1,5 +1,6 @@
 package com.controlefinanceiro.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import com.controlefinanceiro.utils.DataUtils;
@@ -43,7 +44,8 @@ public class ReceitaController {
 
     @GetMapping("/{data}")
     public List<Receita> listReceitasByMes(@PathVariable String data){
-        var dtInicial = DataUtils.convertStringToDate(data);
+        var aux = DataUtils.convertStringToDate(data);
+        var dtInicial = LocalDate.of(aux.getYear(),aux.getMonth(), 1);
         var dtFinal = DataUtils.getLastDayofMonth(data);
         System.out.println(dtInicial + " "+dtFinal);
         return service.listReceitasByMes(dtInicial,dtFinal);

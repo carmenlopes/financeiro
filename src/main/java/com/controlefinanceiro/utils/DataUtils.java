@@ -12,6 +12,12 @@ public abstract class DataUtils {
         return LocalDate.parse(data, formatter);
     }
 
+    public static LocalDate convertStringToDateByFormat(String data, String format){
+        Locale.setDefault(Locale.US);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+        return LocalDate.parse(data, formatter);
+    }
+
     public static LocalDate getLastDayofMonth(String data){
         LocalDate dataConvert = convertStringToDate(data);
         return dataConvert.withDayOfMonth(dataConvert.getMonth().length(dataConvert.isLeapYear()));

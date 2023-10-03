@@ -52,9 +52,7 @@ public class ReceitaService {
     }
 
     public List<Receita> listReceitasByMes(LocalDate inicial, LocalDate Final){
-        var teste = receitaRepo.findAllByDtEntradaBetween(inicial,Final);
-        System.out.println("o q retorna: "+teste);
-        return teste;
+        return receitaRepo.findAllByDtEntradaBetweenOrderByDtEntradaAsc(inicial,Final);
     }
 
     

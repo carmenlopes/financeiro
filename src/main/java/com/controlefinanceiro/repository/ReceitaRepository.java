@@ -14,7 +14,7 @@ import java.util.List;
 @Repository
 public interface ReceitaRepository extends JpaRepository<Receita,Long>{
 
-    List<Receita> findAllByDtEntradaBetween(LocalDate dtEntradaInical,
-                                              LocalDate dtEntradaFinal);
-    
+    List<Receita> findAllByDtEntradaBetweenOrderByDtEntradaAsc(LocalDate dtEntradaInical,
+                                                               LocalDate dtEntradaFinal);
+
 }

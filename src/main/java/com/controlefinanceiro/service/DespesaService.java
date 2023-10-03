@@ -1,5 +1,6 @@
 package com.controlefinanceiro.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,5 +45,12 @@ public class DespesaService {
 //            despesa.setContaDePagamento(conta);
             return despesa;
             });
+    }
+    public List<Despesa> listAllDespesasByMes(LocalDate dtInicio, LocalDate dtFim){
+        return repository.findAllByDtVencimentoBetweenOrderByDtVencimentoAsc(dtInicio, dtFim);
+    }
+
+    public Double listSomaDespesasByMes(LocalDate dtInicio, LocalDate dtFim){
+        return repository.calcularSomaDespesaByMes(dtInicio, dtFim);
     }
 }

@@ -55,10 +55,13 @@ public class ControlefinanceiroApplication implements CommandLineRunner{
 		var receita1 = new Receita("Salário",5456.88, tipoRecSalario, LocalDate.now(),conta1);
 		var receita2 = new Receita("Salário",5456.88, tipoRecSalario, LocalDate.of(2023,10,10),conta1);
 		var receita3 = new Receita("Salário",500.88, tipoRecSalario, LocalDate.of(2023,11,10),conta1);
+		var receita4 = new Receita("PLR",200.00, tipoRecSalario, LocalDate.of(2023,10,1),conta1);
 
 		receitaRepo.save(receita1);
 		receitaRepo.save(receita2);
 		receitaRepo.save(receita3);
+		receitaRepo.save(receita4);
+
 
 
 
