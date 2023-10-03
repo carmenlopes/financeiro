@@ -20,5 +20,4 @@ public class ReceitaDto {
     private Double valor;
     private String tipoReceita;
     private LocalDate dtEntrada;
-    private String conta;
 }

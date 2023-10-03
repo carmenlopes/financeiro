@@ -1,7 +1,11 @@
 package com.controlefinanceiro.controller;
 
 import java.time.LocalDate;
+import java.time.format.TextStyle;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import com.controlefinanceiro.utils.DataUtils;
 import org.springframework.http.HttpStatus;
@@ -42,6 +46,11 @@ public class ReceitaController {
         return service.listReceitas();
     }
 
+    @GetMapping(value="/tiporeceita")
+    public List<TipoReceita> listTipos(){
+        return service.listTipos();
+    }
+
     @GetMapping("/{data}")
     public List<Receita> listReceitasByMes(@PathVariable String data){
         var aux = DataUtils.convertStringToDate(data);
@@ -50,9 +59,21 @@ public class ReceitaController {
         System.out.println(dtInicial + " "+dtFinal);
         return service.listReceitasByMes(dtInicial,dtFinal);
     }
-    
-    @GetMapping(value="/tiporeceita")
-    public List<TipoReceita> listTipos(){
-        return service.listTipos();
+
+    @GetMapping("/anual/{ano}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public Map<String, Double> listSomaReceitasByMesAno(@PathVariable int ano) {
+        Map<String, Double> soma = new LinkedHashMap<>();
+        int mes = 1;
+        do{
+            var dtInicial = LocalDate.of(ano,mes,1);
+            var dtFinal = LocalDate.of(ano,mes,dtInicial.lengthOfMonth());
+            String nomeMes = dtInicial.getMonth().getDisplayName(TextStyle.FULL,new Locale("pt", "BR"));
+            System.out.println("Nome dom mes: "+nomeMes);
+            soma.put(nomeMes.toUpperCase(),service.listSomaReceitasByMes(dtInicial, dtFinal));
+            mes++;
+        }while (mes <= 12);
+        return soma;
     }
+    //TODO: Agrupar a soma de receitas por tipo e mes
 }

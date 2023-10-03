@@ -55,5 +55,8 @@ public class ReceitaService {
         return receitaRepo.findAllByDtEntradaBetweenOrderByDtEntradaAsc(inicial,Final);
     }
 
-    
+
+    public Double listSomaReceitasByMes(LocalDate dtInicial, LocalDate dtFinal) {
+        return null;
+    }
 }
