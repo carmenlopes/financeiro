@@ -14,4 +14,5 @@ public interface ContaUseCase {
     List<Conta> listarContas();
     Optional<Conta> buscarById(Long id);
 
+    Optional<Conta> buscarSaldoContaByMes(String data);
 }

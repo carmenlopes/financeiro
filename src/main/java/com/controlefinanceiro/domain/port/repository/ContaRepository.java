@@ -12,4 +12,7 @@ public interface ContaRepository extends JpaRepository<Conta, Long>{
     
     List<Conta> findByNome(String name);
 
+    //TODO: jpql com conta movimentação para pegar o saldo mensal de uma conta
+//    List<Conta> findSaldoByDtEntrada();
+
 }

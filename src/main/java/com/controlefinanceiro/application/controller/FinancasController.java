@@ -52,4 +52,9 @@ public class FinancasController extends BaseAPI {
         return contaImpl.buscarById(id);
     }
 
+    @GetMapping("/conta/saldomensal/{data}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public Optional<Conta> saldoMensalByConta(@PathVariable String data){
+        return contaImpl.buscarSaldoContaByMes(data);
+    }
 }

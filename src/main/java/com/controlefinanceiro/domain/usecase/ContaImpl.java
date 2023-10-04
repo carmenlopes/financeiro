@@ -52,4 +52,10 @@ public class ContaImpl implements ContaUseCase {
     public Optional<Conta> buscarById(Long id) {
         return repository.findById(id);
     }
+    @Override
+    public Optional<Conta> buscarSaldoContaByMes(String data) {
+        //TODO: Implementar
+        return Optional.empty();
+    }
+
 }

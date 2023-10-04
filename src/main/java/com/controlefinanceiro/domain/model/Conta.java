@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 @Getter
 @Setter @ToString
 @Entity
@@ -19,6 +21,9 @@ public class Conta implements Transacoes {
     private double saldoTotal;
     @Enumerated(EnumType.STRING)
     private TipoConta tipoConta;
+    @OneToMany
+    @JoinColumn(name = "conta_id")
+    private List<ContaMovimentacao> transacoes;
     public Conta() {
     }
 
