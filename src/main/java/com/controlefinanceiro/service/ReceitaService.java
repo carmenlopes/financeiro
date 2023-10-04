@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.controlefinanceiro.model.Receita;
-import com.controlefinanceiro.model.types.TipoReceita;
-import com.controlefinanceiro.repository.ContaRepository;
-import com.controlefinanceiro.repository.ReceitaRepository;
-import com.controlefinanceiro.repository.TipoReceitaRepository;
+import com.controlefinanceiro.domain.model.Receita;
+import com.controlefinanceiro.domain.model.types.TipoReceita;
+import com.controlefinanceiro.domain.port.repository.ContaRepository;
+import com.controlefinanceiro.domain.port.repository.ReceitaRepository;
+import com.controlefinanceiro.domain.port.repository.TipoReceitaRepository;
 
 import jakarta.validation.Valid;
 
@@ -34,7 +34,7 @@ public class ReceitaService {
     }
 
     public @Valid Receita createReceita(@Valid Receita req) {
-            contaRepo.findById(req.getContaDestino().getId()).map(conta -> {
+            contaRepo.findById(req.getConta().getId()).map(conta -> {
                 req.adicionarConta(conta);
                TipoReceita t = tipoReceitaRepo.findById(req.getTipoReceita().getId()).get();
                req.setTipoReceita(t);

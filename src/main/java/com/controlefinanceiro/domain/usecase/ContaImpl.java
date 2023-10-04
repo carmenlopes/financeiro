@@ -1,34 +1,29 @@
-package com.controlefinanceiro.service;
+package com.controlefinanceiro.domain.usecase;
 
-import com.controlefinanceiro.utils.exception.RecordNotFoundException;
 import com.controlefinanceiro.domain.model.Conta;
 import com.controlefinanceiro.domain.port.repository.ContaRepository;
 import com.controlefinanceiro.domain.port.repository.MetaRepository;
+import com.controlefinanceiro.domain.port.usecase.ContaUseCase;
+import com.controlefinanceiro.utils.exception.RecordNotFoundException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class ContaService {
+public class ContaImpl implements ContaUseCase {
 
     public final ContaRepository repository;
 
     public final MetaRepository metaRepository;
 
-   
-
-    public ContaService(ContaRepository repository, MetaRepository metaRepository) {
+    public ContaImpl(ContaRepository repository, MetaRepository metaRepository) {
         this.repository = repository;
         this.metaRepository = metaRepository;
     }
 
-    public List<Conta> listAll() {
-        return repository.findAll();
-    }
-
-    public Conta create(@Valid Conta contaRequest) {
+    @Override
+    public Conta criarConta(@Valid Conta contaRequest) {
         repository.findByNome(contaRequest.getNome()).stream()
                 .findAny().ifPresent(c -> {
                     try {
@@ -40,12 +35,21 @@ public class ContaService {
         return repository.save(contaRequest);
     }
 
+    @Override
     public Conta updateNome(@NotNull Long id, @Valid Conta conta) {
         return repository.findById(id).map(actual -> {
-            actual.setNome(conta.getNome());
-            return repository.save(actual);
-        })
-        .orElseThrow(() -> new RecordNotFoundException(id));
+                    actual.setNome(conta.getNome());
+                    return repository.save(actual);
+                })
+                .orElseThrow(() -> new RecordNotFoundException(id));
+    }
+    @Override
+    public List<Conta> listarContas() {
+        return repository.findAll();
     }
 
+    @Override
+    public Optional<Conta> buscarById(Long id) {
+        return repository.findById(id);
+    }
 }

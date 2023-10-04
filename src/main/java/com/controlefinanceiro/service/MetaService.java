@@ -5,9 +5,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.controlefinanceiro.dto.MetaEditReq;
-import com.controlefinanceiro.model.Meta;
-import com.controlefinanceiro.repository.MetaRepository;
+import com.controlefinanceiro.domain.model.dto.MetaEditReq;
+import com.controlefinanceiro.domain.model.Meta;
+import com.controlefinanceiro.domain.port.repository.MetaRepository;
 
 import jakarta.validation.Valid;
 

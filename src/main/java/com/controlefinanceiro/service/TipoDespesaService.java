@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.controlefinanceiro.model.types.TipoDespesa;
-import com.controlefinanceiro.repository.TipoDespesaRepository;
+import com.controlefinanceiro.domain.model.types.TipoDespesa;
+import com.controlefinanceiro.domain.port.repository.TipoDespesaRepository;
 
 import jakarta.validation.Valid;
 

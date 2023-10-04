@@ -6,10 +6,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
-import com.controlefinanceiro.model.Conta;
-import com.controlefinanceiro.model.Despesa;
-import com.controlefinanceiro.repository.ContaRepository;
-import com.controlefinanceiro.repository.DespesaRepository;
+import com.controlefinanceiro.domain.model.Despesa;
+import com.controlefinanceiro.domain.port.repository.ContaRepository;
+import com.controlefinanceiro.domain.port.repository.DespesaRepository;
 
 import jakarta.validation.Valid;
 
